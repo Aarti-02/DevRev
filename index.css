@@ -1,0 +1,583 @@
+
+
+    .loader-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10000;
+      background-color: #F5F7F6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+    }
+    
+    .loader-container.fade-out {
+      top: -120%;
+    }
+    
+    .container {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    h1 {
+      text-align: center;
+      position: relative;
+      color: #ff1404;
+    }
+    
+    h1:before {
+      content: "";
+      position:  absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      /* background-image: url('booksverse.jpg'); */
+      background-size: cover;
+      background-position: left;
+      
+    }
+    
+    h1:after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1400px;
+      height: 2px;
+      background-color: #0915f4;
+    }
+    
+    h1:before,
+    h1:after {
+      animation-duration: 2s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+    }
+    
+    @keyframes slide-in {
+      0%,
+      100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+    
+    h1:before {
+      animation-name: slide-in;
+      animation-delay: 0.5s;
+    }
+    
+    h1:after {
+      animation-name: slide-in;
+      animation-delay: 1s;
+    }
+    
+    
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+    
+    .search-bar {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+    }
+    
+    .search-bar input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #52c3d9;
+      border-radius: 10px;
+      background-color: #fff;
+      transition: box-shadow 0.3s ease;
+    }
+    
+    .search-bar input[type="text"]:focus {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .search-bar .suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: #3dc6f3;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      z-index: 1;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .search-bar .suggestions ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .search-bar .suggestions li {
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .search-bar .suggestions li:hover {
+      background-color: #f2f2f2;
+    }
+    
+    .pagination {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .pagination button {
+      padding: 5px 10px;
+      margin-right: 5px;
+      cursor: pointer;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .pagination button:hover {
+      background-color: #f2f2f2;
+    }
+    
+    .pagination button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .results {
+      margin-top: 20px;
+      list-style: none;
+      padding: 0;
+    }
+    
+    .results li {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+      background-color: #fff;
+      transition: box-shadow 0.3s ease;
+    }
+    
+    .results li:hover {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .results li img {
+      max-width: 100px;
+      height: auto;
+      float: left;
+      margin-right: 10px;
+    }
+    
+    .add-button {
+      background-color: rgb(0, 13, 255);
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    
+    .add-button:hover {
+      background-color: lightcoral;
+    }
+    
+    #cart-icon {
+      position: relative;
+      display: inline-block;
+      left: 500px;
+      
+    }
+    
+    #cart-icon-image {
+      width: 30px;
+      height: auto;
+      margin-left: 650px;
+    }
+    
+    #cart-item-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      display: inline-block;
+      padding: 4px 6px;
+      background-color: rgb(255, 4, 0);
+      color: white;
+      font-size: 12px;
+      border-radius: 50%;
+    }
+    
+    #cart {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      
+
+    }
+    
+    .cart-item {
+      margin-bottom: 10px;
+    }
+    
+    #cart {
+      display: none;
+    }
+    
+    #cart.show-cart {
+      display: block;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    .book-card {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .book-card img {
+      width: 100px;
+      height: 150px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    
+    .book-card h2 {
+      margin-bottom: 5px;
+    }
+    
+    .book-card p {
+      margin: 0;
+    }
+    
+    #books {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .book {
+      display: flex;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      
+    }
+    
+    .book img {
+      width: 100px;
+      height: auto;
+      margin-right: 10px;
+    }
+    ul#FICTION {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    ul#FICTION li.book {
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+    }
+    
+    ul#FICTION li.book:last-child {
+      margin-right: 0;
+    }
+    
+    ul#FICTION li.book img {
+      width: 200px;
+      height: auto;
+    }
+    
+    .book-details {
+      margin-top: 10px;
+    }
+    
+    .show-cart {
+      display: block;
+    }
+    ul#SCIENCE {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    ul#SCIENCE li.book {
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+    }
+    
+    ul#SCIENCE li.book:last-child {
+      margin-right: 0;
+    }
+    
+    ul#SCIENCE li.book img {
+      width: 200px;
+      height: auto;
+    }
+    
+    .book-details {
+      margin-top: 10px;
+    }
+    
+    .show-cart {
+      display: block;
+    }
+    ul#MATHS {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    ul#MATHS li.book {
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+    }
+    
+    ul#MATHS li.book:last-child {
+      margin-right: 0;
+    }
+    
+    ul#MATHS li.book img {
+      width: 200px;
+      height: auto;
+    }
+    
+    .book-details {
+      margin-top: 10px;
+    }
+    
+    .show-cart {
+      display: block;
+    }
+    ul#SOCIAL {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    ul#SOCIAL li.book {
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+    }
+    
+    ul#SOCIAL li.book:last-child {
+      margin-right: 0;
+    }
+    
+    ul#SOCIAL li.book img {
+      width: 200px;
+      height: auto;
+    }
+    
+    .book-details {
+      margin-top: 10px;
+    }
+    
+    .show-cart {
+      display: block;
+    }
+    ul#CRIME {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    ul#CRIME li.book {
+      display: flex;
+      flex-direction: column;
+      margin-right: 20px;
+    }
+    
+    ul#CRIME li.book:last-child {
+      margin-right: 0;
+    }
+    
+    ul#CRIME li.book img {
+      width: 200px;
+      height: auto;
+    }
+    
+    .book-details {
+      margin-top: 10px;
+    }
+    
+    .show-cart {
+      display: block;
+    }
+    
+    
+    
+    
+    
+    
+    .book h2 {
+      margin-top: 0;
+    }
+    
+    .book p {
+      margin-bottom: 0;
+    }
+    
+    a {
+      text-decoration: none;
+      background-color: blue;
+      border-radius: 20px;
+      color: #F5F7F6;
+      font-size: 20px;
+      padding: 15px 15px;
+      size: 50px;
+      margin-left: 1200px;
+    }
+    
+    #prevButton,#nextButton{
+      /* margin-left: 710px; */
+      /* margin: 0 40px; */
+      padding: 10px 15px;
+      background-color: #cf2819;
+      color: #fff;
+      border: none;
+      text-decoration: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-position 0.3s linear;
+      background-position: 0% 0%;
+      background-size: 200% auto;
+      background-image: linear-gradient(to right, rgb(15, 207, 237) 50% ,#2205ff  50%);
+  
+    }
+    #prevButton:hover{
+      background-position: 100% 0%;
+      border-color:rgb(240, 232, 7);
+    }
+    #nextButton:hover{
+      background-position: 100% 0%;
+      border-color:rgb(239, 190, 12);
+    }
+    
+
+    
+    /* Additional Styles */
+    
+    /* Add animation effect to the search bar */
+    .search-bar input[type="text"] {
+      transition: width 0.3s ease;
+    }
+    
+    .search-bar input[type="text"]:focus {
+      width: 400px;
+    }
+    
+    /* Add hover effect to the book cards */
+    .book-card:hover {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Add background gradient to the pagination buttons */
+    .pagination button {
+      background-image: linear-gradient(to bottom, #fff 0%, #f2f2f2 100%);
+    }
+    
+    .pagination button:hover {
+      background-image: linear-gradient(to bottom, #f2f2f2 0%, #fff 100%);
+    }
+    
+    /* Add animation effect to the add button */
+    .add-button {
+      transition: background-color 0.3s ease;
+    }
+    
+    .add-button:hover {
+      background-color: rgb(255, 13, 0);
+    }
+    
+    /* Add styles to the cart container */
+    #cart {
+      transition: opacity 0.3s ease;
+    }
+    
+    #cart.empty {
+      opacity: 0.5;
+    }
+    
+    /* Add styles to the cart items */
+    .cart-item {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .cart-item img {
+      width: 50px;
+      height: 75px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    
+    .cart-item p {
+      margin: 0;
+    }
+    
+    .cart-item .quantity {
+      display: flex;
+      align-items: center;
+    }
+    
+    .cart-item .quantity input {
+      width: 40px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 5px;
+    }
+    
+    .cart-item .remove-button {
+      background-color: #cf2819;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    
+    .cart-item .remove-button:hover {
+      background-color: rgb(255, 4, 0);
+    }
+    

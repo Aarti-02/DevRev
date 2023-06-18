@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .search-bar {
+      position: relative;
+    }
+    
+    .search-bar input {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    
+    .suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 300px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 10px;
+      list-style-type: none;
+      display: none;
+    }
+    
+    .suggestions li {
+      cursor: pointer;
+      padding: 5px;
+    }
+    
+    .suggestions li:hover {
+      background-color: #e5e5e5;
+    }
+  </style>
+</head>
+<body>
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search..." oninput="handleInput(this.value)">
+    <ul id="suggestions" class="suggestions"></ul>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('search-input');
+    const suggestionsList = document.getElementById('suggestions');
+
+    searchInput.addEventListener('input', () => {
+      const searchText = searchInput.value.trim();
+      
+      if (searchText !== '') {
+        getSuggestions(searchText)
+          .then(suggestions => {
+            showSuggestions(suggestions);
+          })
+          .catch(error => {
+            console.error('Error fetching suggestions:', error);
+          });
+      } else {
+        hideSuggestions();
+      }
+    });
+
+    function getSuggestions(searchText) {
+      const endpoint = `https://openlibrary.org/search.json?search=${encodeURIComponent(searchText)}`;
+
+      return fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+          return data.map(book => book.title);
+        });
+    }
+
+    function showSuggestions(suggestions) {
+      suggestionsList.innerHTML = '';
+
+      if (suggestions.length > 0) {
+        suggestions.forEach(suggestion => {
+          const li = document.createElement('li');
+          li.textContent = suggestion;
+          li.addEventListener('click', () => {
+            handleSuggestionClick(suggestion);
+          });
+          suggestionsList.appendChild(li);
+        });
+
+        suggestionsList.style.display = 'block';
+      } else {
+        hideSuggestions();
+      }
+    }
+
+    function hideSuggestions() {
+      suggestionsList.style.display = 'none';
+    }
+
+    function handleSuggestionClick(suggestion) {
+      searchInput.value = suggestion;
+      hideSuggestions();
+
+      getBookDetails(suggestion)
+        .then(book => {
+          console.log('Selected Book Details:', book);
+          // Display the book details on your page
+          // Your code to display the book details goes here
+        })
+        .catch(error => {
+          console.error('Error fetching book details:', error);
+        });
+    }
+
+    function getBookDetails(bookTitle) {
+      const endpoint = `https://openlibrary.org/search.json?title=${encodeURIComponent(bookTitle)}`;
+
+      return fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+          // Assuming the API returns a single book object
+          return data[0];
+        });
+    }
+  </script>
+</body>
+</html>

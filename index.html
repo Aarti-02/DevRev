@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="index.css">
+     <script src="index.js"></script> 
+     
+    
+    
+</head>
+<body>
+    
+   
+    <div class="loader-container">
+        <img src="book loader.gif" alt="">
+    </div>
+    <h1>WELCOME TO BOOKSVERSE</h1>
+    <div class="container">
+
+        <a href="login.html" >Sign In</a>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search books..." autocomplete="off">
+            <div class="suggestions" id="suggestions"></div>
+          </div>
+        
+          <div class="pagination">
+            <button id="prevButton" disabled>Previous</button>
+            <button id="nextButton" disabled>Next</button>
+          </div>
+        
+          <ul class="results" id="results"></ul>
+          
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="index.js"></script>
+  <div id="cart-icon">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWX3MGbr3TnrQNTGCHKkA4VRRNR1hx9OuWgBNe9LLOUBjVuQ_2tKdEdacZWRr8HUQYg7s&usqp=CAU" alt="Cart Icon" id="cart-icon-image" />
+    <span id="cart-item-count">0</span>
+  </div>
+  <div id="cart">
+    <h2>Cart</h2>
+  </div>
+        
+            
+            
+<h1>FICTION</h1>
+<ul id="FICTION" class="results"></ul>
+
+  <h1>SCIENCE</h1>
+  <ul id="SCIENCE"></ul>
+  <h1>MATHS</h1>
+  <ul id="MATHS"></ul>
+  <h1>SOCIAL</h1>
+  <ul id="SOCIAL"></ul>
+  <h1>CRIME</h1>
+  <ul id="CRIME"></ul>
+  
+        
+      </div>
+
+</body>
+</html>
